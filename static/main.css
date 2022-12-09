@@ -1,0 +1,8 @@
+@font-face{
+    font-family: Monolisa;
+    src: url('MonoLisa-Regular.woff2') format('woff2');
+}
+
+body{
+    font-family: Monolisa !important;
+}
