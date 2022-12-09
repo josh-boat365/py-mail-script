@@ -34,9 +34,15 @@ def sendEmail(name, email):
 #function to send email to multiple persons at the same time on a different thread        
 def send_emails_to_respective_persons():
     name_email_pairs = app.config['NAME_EMAIL_PAIRS']
+    # name_email_pairs = [("Jane Doe","janedoe@gmail.com"),("John Doe","johndoe@gmail.com")] a list of name and email pairs
+
+    # a loop to get the name and email of each person from the list 'name_email_pairs'
     for name, email in name_email_pairs:
+        # name and email are passed to the thread, making use of the sendEmail function, so that the thread can send the email to respective persons
         thread = Thread(target=sendEmail(name=name,email=email))
+        # the thread is started
         thread.start()
+        # the thread in process is joined to the main thread until it is finished
         thread.join()
 
 
