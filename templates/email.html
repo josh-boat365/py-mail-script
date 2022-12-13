@@ -103,8 +103,11 @@
 				they will help you complete the challenge.</p
 			>
 			<h2><b>Challenge:</b></h2>
-			<p>{{ message }}</p>
-
+			<p>------------------------------------------------------------</p>
+			{% for challenge in message %}
+			<p>{{ challenge }}</p>
+			{% endfor %}
+			<p>------------------------------------------------------------</p>
 			<p
 				>After the challenge, a member from the team will review your code. We
 				will follow-up with you once we have a better understanding of the

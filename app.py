@@ -25,73 +25,74 @@ mail = Mail(app)
 def roles_types():
     years_of_experience = 0
     return   {'frontend':{
-        years_of_experience < 3 : """
-       Create a post webapp that: \n
-       - Allows a user to create, view one, view all, update and delete a posts. \n
-       - Push to Github and add interviewer as a collaborator. \n
-       - Deploy on any platform of your choice and share link. \n
-       - No need for backend or database, store data anyhow you see fit. \n""",
-       years_of_experience >3 and years_of_experience < 5 : """
-       Create a post webapp that: \n
-       - Allows a user to create, view one, view all, update and delete a posts. \n
-       - Push to Github and add interviewer as a collaborator. \n
-       - Deploy on any platform of your choice and share link. \n
-       - No need for backend or database, store data anyhow you see fit.
-       - UI should be responsive(should work on mobile devices). \n
-       - Add simple documentation on how to setup and run the app. \n""",
-       years_of_experience > 5 : """
-       Create a post webapp that: \n
-       - Allows a user to create, view one, view all, update and delete a posts. \n
-       - Push to Github and add interviewer as a collaborator. \n
-       - Deploy on any platform of your choice and share link. \n
-       - No need for backend or database, store data anyhow you see fit.
-       - UI should be responsive(should work on mobile devices). \n
-       - Add simple documentation on how to setup and run the app. \n
-       - UX should be taken into consideration. \n
-       - Setup unit test to cover at least 50% of the code. \n"""},
+        years_of_experience < 3 : [
+       "Create a post webapp that:",
+       "- Allows a user to create, view one, view all, update and delete a posts.",
+       "- Push to Github and add interviewer as a collaborator.",
+       "- Deploy on any platform of your choice and share link.",
+       "- No need for backend or database, store data anyhow you see fit." ],
+       years_of_experience >3 and years_of_experience < 5 : [
+        "Create a post webapp that:",
+       "- Allows a user to create, view one, view all, update and delete a posts.",
+       "- Push to Github and add interviewer as a collaborator.",
+       "- Deploy on any platform of your choice and share link.",
+       "- No need for backend or database, store data anyhow you see fit.",
+       "- UI should be responsive(should work on mobile devices). ",
+       "- Add simple documentation on how to setup and run the app." ],
+       years_of_experience > 5 : [
+        "Create a post webapp that:",
+       "- Allows a user to create, view one, view all, update and delete a posts.",
+       "- Push to Github and add interviewer as a collaborator.",
+       "- Deploy on any platform of your choice and share link.",
+       "- No need for backend or database, store data anyhow you see fit.",
+       "- UI should be responsive(should work on mobile devices). ",
+       "- Add simple documentation on how to setup and run the app.",
+       "- UX should be taken into consideration.",
+       "- Setup unit test to cover at least 50% of the code. " ] 
+       },
        'backend':{
-        years_of_experience < 3 : """
-       Create a post API that: \n
-       - Allows a user to create, view one, view all, update and delete a posts. \n
-       - Push to Github and add interviewer as a collaborator. \n
-       - Deploy on any platform of your choice and share link. \n""", 
-       years_of_experience >3 and years_of_experience < 5 : """
-       Create a post API that: \n
-       - Allows a user to create, view one, view all, update and delete a posts. \n
-       - Push to Github and add interviewer as a collaborator. \n
-       - Deploy on any platform of your choice and share link. \n\n
-       - Add simple documentation on how to setup and run the app. \n""",
-       years_of_experience > 5 : """
-       Create a post API that: \n
-       - Allows a user to create, view one, view all, update and delete a posts. \n
-       - Push to Github and add interviewer as a collaborator. \n
-       - Deploy on any platform of your choice and share link. \n\n
-       - Add simple documentation on how to setup and run the app. \n
-       - Dockerize solution. \n
-       - Setup unit test to cover at least 50% of the code. \n"""},
+        years_of_experience < 3 : 
+       ["Create a post API that:", 
+       "- Allows a user to create, view one, view all, update and delete a posts.", 
+       "- Push to Github and add interviewer as a collaborator.", 
+       "- Deploy on any platform of your choice and share link."], 
+       years_of_experience >3 and years_of_experience < 5 : 
+       ["Create a post API that:", 
+       "- Allows a user to create, view one, view all, update and delete a posts.", 
+       "- Push to Github and add interviewer as a collaborator.", 
+       "- Deploy on any platform of your choice and share link.",
+       "- Add simple documentation on how to setup and run the app. "],
+       years_of_experience > 5 : 
+       ["Create a post API that:", 
+       "- Allows a user to create, view one, view all, update and delete a posts.", 
+       "- Push to Github and add interviewer as a collaborator.", 
+       "- Deploy on any platform of your choice and share link.",
+       "- Add simple documentation on how to setup and run the app. ",
+       " - Dockerize solution. ",
+       "- Setup unit test to cover at least 50% of the code. "]},
          'fullstack':{
-            years_of_experience < 3 : """
-         Create a post webapp + API: \n
-         - Allows a user to create, view one, view all, update and delete a posts \n.
-         - Push to Github and add interviewer as a collaborator (two separate repos) \n.
-         - Deploy on any platform of your choice and share link.\n 
-         """,
-         years_of_experience >3 and years_of_experience < 5 : """
-          Create a post webapp + API: \n
-         - Allows a user to create, view one, view all, update and delete a posts \n.
-         - Push to Github and add interviewer as a collaborator (two separate repos) \n.
-         - Deploy on any platform of your choice and share link.\n
-         - Users should be able to authenticate and do these actions on only posts they created. \n
-         - Add simple documentation on how to setup and run the app. \n """,
-         years_of_experience > 5 : """
-         Create a post webapp + API: \n
-         - Allows a user to create, view one, view all, update and delete a posts \n.
-         - Push to Github and add interviewer as a collaborator (two separate repos) \n.
-         - Deploy on any platform of your choice and share link.\n
-         - Users should be able to authenticate and do these actions on only posts they created. \n
-         - Add simple documentation on how to setup and run the app. 
-         - Dockerize solution both webpp and api. \n
-         - Setup unit test to cover at least 50% of the code. \n"""},
+        years_of_experience < 3 : 
+         ["Create a post webapp + API:",
+         "- Allows a user to create, view one, view all, update and delete a posts.",
+         "- Push to Github and add interviewer as a collaborator (two separate repos).",
+         "- Deploy on any platform of your choice and share link."],
+         years_of_experience >3 and years_of_experience < 5 : 
+          ["Create a post webapp + API:",
+         "- Allows a user to create, view one, view all, update and delete a posts.",
+         "- Push to Github and add interviewer as a collaborator (two separate repos).",
+         "- Deploy on any platform of your choice and share link.",
+         "- Users should be able to authenticate and do these actions on only posts they created.",
+         "- Add simple documentation on how to setup and run the app." ],
+         years_of_experience > 5 :
+          ["Create a post webapp + API:",
+         "- Allows a user to create, view one, view all, update and delete a posts.",
+         "- Push to Github and add interviewer as a collaborator (two separate repos).",
+         "- Deploy on any platform of your choice and share link.",
+         "- Users should be able to authenticate and do these actions on only posts they created.",
+         "- Add simple documentation on how to setup and run the app.", 
+         "- Dockerize solution both webpp and api.", 
+         "- Setup unit test to cover at least 50% of the code."]
+         }
        }
 
 #function to send email
@@ -114,47 +115,48 @@ def sendEmail(name, email, role, years_of_experience):
     
     msg = Message()
     msg.subject = "Invitation to Slightly Techie Network"
-    msg.sender = ("Slightly Techie","noreply@gmail.com")
+    msg.sender = ("Slightly Techie","no-reply@gmail.com")
     msg.recipients = [email]
+    msg.cc = ['Johndoe@gmail.com', 'Janedoe@gmail.com']
     if role == 'frontend':
         if years_of_experience < 3:
             msg.html = render_template('email.html', recipient_name = name, message = frontend_junior)
             mail.send(msg)
-            pass
-        elif years_of_experience >=3 and years_of_experience <=5:
+            
+        elif years_of_experience in range(3,6):
             msg.html = render_template('email.html', recipient_name = name, message = frontend_intermediate)
             mail.send(msg)
-            pass
+            
         elif years_of_experience > 5:
             msg.html = render_template('email.html', recipient_name = name,  message = frontend_senior)
             mail.send(msg)
-            pass
+            
     if role == 'backend':
         if years_of_experience < 3:
             msg.html = render_template('email.html', recipient_name = name, message = backend_junior)
             mail.send(msg)
-            pass
-        elif years_of_experience >=3 and years_of_experience <=5:
+            
+        elif years_of_experience in range(3,6):
             msg.html = render_template('email.html', recipient_name = name, message = backend_intermediate)
             mail.send(msg)
-            pass
+            
         elif years_of_experience > 5:
             msg.html = render_template('email.html', recipient_name = name, message = backend_senior)
             mail.send(msg)
-            pass
+        
     if role == 'fullstack':
         if years_of_experience < 3:
             msg.html = render_template('email.html', recipient_name = name, message = fullstack_junior)
             mail.send(msg)
-            pass
-        elif years_of_experience >=3 and years_of_experience <=5:
+            
+        elif years_of_experience in range(3,6):
             msg.html = render_template('email.html', recipient_name = name, message = fullstack_intermediate)
             mail.send(msg)
-            pass
+            
         elif years_of_experience > 5:
             msg.html = render_template('email.html', recipient_name = name, message = fullstack_senior)
             mail.send(msg)
-            pass
+            
         else:
             msg.html = render_template('email.html', recipient_name = name, message = "Sorry.., we are experiencing some technical difficulties. we will get back to you shortly.")
             mail.send(msg)  
@@ -163,7 +165,9 @@ def sendEmail(name, email, role, years_of_experience):
 #function to send email to multiple persons at the same time on a different thread        
 def send_emails_to_respective_persons():
     name_email_pairs = [
-     ("Jane Doe" ,"janedoe@gmail.com", "frontend", 3),("John Doe", "johndoe@gmail.com", "backend", 2)
+     ("Elon Musk" ,"test1@gmail.com", "fullstack", 8),("Nikola Tesla", "test2@gmail.com", "backend", 15),("Joshua Nyarko Boateng", "test3@gmail.com", "fullstack", 12),("Slightly Techie", "test4@gmail.com", "backend", 8)
+
+
 ]
     # name_email_pairs = [("Jane Doe","janedoe@gmail.com"),("John Doe","johndoe@gmail.com")] a list of name and email pairs
     threads = [] # a list to hold the threads
@@ -174,14 +178,15 @@ def send_emails_to_respective_persons():
         thread = Thread(target=sendEmail(name=name,email=email, role=role, years_of_experience=years_of_experience))
         # the thread is started
         thread.start()
+        thread.join()
         # the thread in process is added to the list of finished threads
-        threads.append(thread)
+        # threads.append(thread)
     
 
 
-    for thread in threads:
-        # the threads are joined to help the main thread wait for the threads to finish before the end of this script
-        thread.join()
+    # for thread in threads:
+    #     # the threads are joined to help the main thread wait for the threads to finish before the end of this script
+    #     thread.join()
 
 
 
