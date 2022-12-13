@@ -93,9 +93,13 @@
 			<h3>Hello {{ recipient_name }}, </h3>
 
 			<p
-				>Thank you for applying to be a part of the Slightly Techie Network! As
-				a part of the selection process, you are to complete a challenge in
-				<b class="b">a week.</b>
+				>Thank you for applying to be part of the Slightly Techie Network! As
+				part of the selection process, you are to complete a challenge in {% if
+				role != 'fullstack' %}
+				<b class="b"> a week</b>
+				{% else %}
+				<b class="b"> two weeks</b>
+				{% endif %}
 			</p>
 			<p
 				>In this email, you will find the challenge as well as instructions on
@@ -117,8 +121,12 @@
 			<p
 				>You can point us to interesting pieces of code or even parts that you’d
 				like to improve over time. Please keep in mind that this challenge
-				should not take <b class="b">longer than a week.</b></p
-			>
+				should not take {% if role != 'fullstack' %}
+				<b class="b">longer than a week</b>
+				{% else %}
+				<b class="b">longer than two weeks</b>
+				{% endif %}
+			</p>
 		</div>
 		<footer>
 			<div class="footer">

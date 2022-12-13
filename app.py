@@ -23,15 +23,14 @@ mail = Mail(app)
 #         return name, email
 
 def roles_types():
-    years_of_experience = 0
     return   {'frontend':{
-        years_of_experience < 3 : [
+        'years_of_experience < 3' : [
        "Create a post webapp that:",
        "- Allows a user to create, view one, view all, update and delete a posts.",
        "- Push to Github and add interviewer as a collaborator.",
        "- Deploy on any platform of your choice and share link.",
        "- No need for backend or database, store data anyhow you see fit." ],
-       years_of_experience >3 and years_of_experience < 5 : [
+       'years_of_experience > 3 and years_of_experience < 5' : [
         "Create a post webapp that:",
        "- Allows a user to create, view one, view all, update and delete a posts.",
        "- Push to Github and add interviewer as a collaborator.",
@@ -39,7 +38,7 @@ def roles_types():
        "- No need for backend or database, store data anyhow you see fit.",
        "- UI should be responsive(should work on mobile devices). ",
        "- Add simple documentation on how to setup and run the app." ],
-       years_of_experience > 5 : [
+       'years_of_experience > 5' : [
         "Create a post webapp that:",
        "- Allows a user to create, view one, view all, update and delete a posts.",
        "- Push to Github and add interviewer as a collaborator.",
@@ -51,18 +50,18 @@ def roles_types():
        "- Setup unit test to cover at least 50% of the code. " ] 
        },
        'backend':{
-        years_of_experience < 3 : 
+        'years_of_experience < 3' : 
        ["Create a post API that:", 
        "- Allows a user to create, view one, view all, update and delete a posts.", 
        "- Push to Github and add interviewer as a collaborator.", 
        "- Deploy on any platform of your choice and share link."], 
-       years_of_experience >3 and years_of_experience < 5 : 
+       'years_of_experience > 3 and years_of_experience < 5' : 
        ["Create a post API that:", 
        "- Allows a user to create, view one, view all, update and delete a posts.", 
        "- Push to Github and add interviewer as a collaborator.", 
        "- Deploy on any platform of your choice and share link.",
        "- Add simple documentation on how to setup and run the app. "],
-       years_of_experience > 5 : 
+       'years_of_experience > 5' : 
        ["Create a post API that:", 
        "- Allows a user to create, view one, view all, update and delete a posts.", 
        "- Push to Github and add interviewer as a collaborator.", 
@@ -71,19 +70,19 @@ def roles_types():
        " - Dockerize solution. ",
        "- Setup unit test to cover at least 50% of the code. "]},
          'fullstack':{
-        years_of_experience < 3 : 
+        'years_of_experience < 3' : 
          ["Create a post webapp + API:",
          "- Allows a user to create, view one, view all, update and delete a posts.",
          "- Push to Github and add interviewer as a collaborator (two separate repos).",
          "- Deploy on any platform of your choice and share link."],
-         years_of_experience >3 and years_of_experience < 5 : 
+         'years_of_experience > 3 and years_of_experience < 5': 
           ["Create a post webapp + API:",
          "- Allows a user to create, view one, view all, update and delete a posts.",
          "- Push to Github and add interviewer as a collaborator (two separate repos).",
          "- Deploy on any platform of your choice and share link.",
          "- Users should be able to authenticate and do these actions on only posts they created.",
          "- Add simple documentation on how to setup and run the app." ],
-         years_of_experience > 5 :
+         'years_of_experience > 5' :
           ["Create a post webapp + API:",
          "- Allows a user to create, view one, view all, update and delete a posts.",
          "- Push to Github and add interviewer as a collaborator (two separate repos).",
@@ -99,19 +98,19 @@ def roles_types():
 def sendEmail(name, email, role, years_of_experience):
     roles_types()
     #frontend messages roles
-    frontend_junior = roles_types()['frontend'][years_of_experience < 3]
-    frontend_intermediate = roles_types()['frontend'][years_of_experience > 3 and years_of_experience < 5]
-    frontend_senior = roles_types()['frontend'][years_of_experience > 5]
+    frontend_junior = roles_types()['frontend']['years_of_experience < 3']
+    frontend_intermediate = roles_types()['frontend']['years_of_experience > 3 and years_of_experience < 5']
+    frontend_senior = roles_types()['frontend']['years_of_experience > 5']
 
     #backend messages roles
-    backend_junior = roles_types()['backend'][years_of_experience < 3]
-    backend_intermediate = roles_types()['backend'][years_of_experience > 3 and years_of_experience < 5]
-    backend_senior = roles_types()['backend'][years_of_experience > 5]
+    backend_junior = roles_types()['backend']['years_of_experience < 3']
+    backend_intermediate = roles_types()['backend']['years_of_experience > 3 and years_of_experience < 5']
+    backend_senior = roles_types()['backend']['years_of_experience > 5']
 
     #fullstack messages roles
-    fullstack_junior = roles_types()['fullstack'][years_of_experience < 3]
-    fullstack_intermediate = roles_types()['fullstack'][years_of_experience > 3 and years_of_experience < 5]
-    fullstack_senior = roles_types()['fullstack'][years_of_experience > 5]
+    fullstack_junior = roles_types()['fullstack']['years_of_experience < 3']
+    fullstack_intermediate = roles_types()['fullstack']['years_of_experience > 3 and years_of_experience < 5']
+    fullstack_senior = roles_types()['fullstack']['years_of_experience > 5']
     
     msg = Message()
     msg.subject = "Invitation to Slightly Techie Network"
@@ -120,41 +119,41 @@ def sendEmail(name, email, role, years_of_experience):
     msg.cc = ['Johndoe@gmail.com', 'Janedoe@gmail.com']
     if role == 'frontend':
         if years_of_experience < 3:
-            msg.html = render_template('email.html', recipient_name = name, message = frontend_junior)
+            msg.html = render_template('email.html', recipient_name = name, role = 'frontend', message = frontend_junior)
             mail.send(msg)
             
         elif years_of_experience in range(3,6):
-            msg.html = render_template('email.html', recipient_name = name, message = frontend_intermediate)
+            msg.html = render_template('email.html', recipient_name = name, role = 'frontend', message = frontend_intermediate)
             mail.send(msg)
             
         elif years_of_experience > 5:
-            msg.html = render_template('email.html', recipient_name = name,  message = frontend_senior)
+            msg.html = render_template('email.html', recipient_name = name, role = 'frontend', message = frontend_senior)
             mail.send(msg)
             
     if role == 'backend':
         if years_of_experience < 3:
-            msg.html = render_template('email.html', recipient_name = name, message = backend_junior)
+            msg.html = render_template('email.html', recipient_name = name, role = 'backend', message = backend_junior)
             mail.send(msg)
             
         elif years_of_experience in range(3,6):
-            msg.html = render_template('email.html', recipient_name = name, message = backend_intermediate)
+            msg.html = render_template('email.html', recipient_name = name, role = 'backend', message = backend_intermediate)
             mail.send(msg)
             
         elif years_of_experience > 5:
-            msg.html = render_template('email.html', recipient_name = name, message = backend_senior)
+            msg.html = render_template('email.html', recipient_name = name, role = 'backend', message = backend_senior)
             mail.send(msg)
         
     if role == 'fullstack':
         if years_of_experience < 3:
-            msg.html = render_template('email.html', recipient_name = name, message = fullstack_junior)
+            msg.html = render_template('email.html', recipient_name = name, role = 'fullstack', message = fullstack_junior)
             mail.send(msg)
             
         elif years_of_experience in range(3,6):
-            msg.html = render_template('email.html', recipient_name = name, message = fullstack_intermediate)
+            msg.html = render_template('email.html', recipient_name = name, role = 'fullstack', message = fullstack_intermediate)
             mail.send(msg)
             
         elif years_of_experience > 5:
-            msg.html = render_template('email.html', recipient_name = name, message = fullstack_senior)
+            msg.html = render_template('email.html', recipient_name = name, role = 'fullstack', message = fullstack_senior)
             mail.send(msg)
             
         else:
