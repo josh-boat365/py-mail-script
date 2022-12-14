@@ -1,5 +1,5 @@
 import os
-import pandas as pd
+import csv
 from threading import Thread
 from flask import Flask, render_template, request
 from flask_mail import Mail, Message
@@ -12,7 +12,7 @@ app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
 app.config['MAIL_USE_SSL'] = os.environ.get('MAIL_USE_SSL') 
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME') 
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD') 
-app.config['NAME_EMAIL_PAIRS'] = os.environ.get('NAME_EMAIL_PAIRS')
+
 
 mail = Mail(app)
 
@@ -160,33 +160,31 @@ def sendEmail(name, email, role, years_of_experience):
             msg.html = render_template('email.html', recipient_name = name, message = "Sorry.., we are experiencing some technical difficulties. we will get back to you shortly.")
             mail.send(msg)  
 
+# function to get name,email,role and years_of_experience from csv file
+def read_csv(filename):
+  rows = []
+  with open(filename, "r") as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+      rows.append((row['ï»¿Name'],
+      row['Email'],
+      row['Role'],
+      row['Years_of_experience'] ))
+  return rows
+
 
 #function to send email to multiple persons at the same time on a different thread        
 def send_emails_to_respective_persons():
-    name_email_pairs = [
-     ("Elon Musk" ,"test1@gmail.com", "fullstack", 8),("Nikola Tesla", "test2@gmail.com", "backend", 15),("Joshua Nyarko Boateng", "test3@gmail.com", "fullstack", 12),("Slightly Techie", "test4@gmail.com", "backend", 8)
-
-
-]
-    # name_email_pairs = [("Jane Doe","janedoe@gmail.com"),("John Doe","johndoe@gmail.com")] a list of name and email pairs
-    threads = [] # a list to hold the threads
+    name_email_pairs = read_csv('emails_csv.csv') #[('Joshua Nyarko Boateng', 'test1@gmail.com', 'backend', '8'), ('Kwame Kay', 'test2@gmail.com', 'fullstack', '1'), ('krypton', 'test3@gmail.com', 'frontend', '12')]
 
     # a loop to get the name and email of each person from the list 'name_email_pairs'
     for name, email, role, years_of_experience in name_email_pairs:
-        # name and email are passed to the thread, making use of the sendEmail function, so that the thread can send the email to respective persons
-        thread = Thread(target=sendEmail(name=name,email=email, role=role, years_of_experience=years_of_experience))
+        # name, email, role, years_of_experience are passed to the thread, making use of the sendEmail function, so that the thread can send the email to respective persons
+        thread = Thread(target=sendEmail(name=name,email=email, role=role.lower(), years_of_experience=int(years_of_experience)))
         # the thread is started
         thread.start()
-        thread.join()
-        # the thread in process is added to the list of finished threads
-        # threads.append(thread)
-    
-
-
-    # for thread in threads:
-    #     # the threads are joined to help the main thread wait for the threads to finish before the end of this script
-    #     thread.join()
-
+        # thread.join()
+        
 
 
 @app.route('/', methods=['GET','POST'])
