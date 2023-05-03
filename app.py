@@ -6,7 +6,7 @@ from flask import Flask, render_template, request
 from flask_mail import Mail, Message
 
 app = Flask(__name__)
-app.app_context().push()
+
 app.config['SECRET'] = os.environ.get('APP_SECRET')
 
 app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER') 
@@ -14,15 +14,11 @@ app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
 app.config['MAIL_USE_SSL'] = os.environ.get('MAIL_USE_SSL') 
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME') 
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD') 
+app.config['COPY_TO_MAILS'] = os.environ.get('COPY_TO_MAILS')
 
 
 mail = Mail(app)
 
-# function to loop through pairs of names and emails
-# def loop_through_name_email_pairs(name_email_pairs):
-#     name_email_pairs = []
-#     for name, email in name_email_pairs:
-#         return name, email
 
 def roles_types():
     return   {'frontend':{
@@ -117,9 +113,9 @@ def sendEmail(name, email, role, years_of_experience, delay):
     with app.app_context():
         msg = Message()
         msg.subject = "Invitation to Slightly Techie Network"
-        msg.sender = ("Slightly Techie","casvalabs@gmail.com")
+        msg.sender = ("Slightly Techie", "casvalabs@gmail.com" )
         msg.recipients = [email]
-        msg.cc = ['slightlytechie@gmail.com', 'wellingtoncharlottenaaodarley@gmail.com','bquansah007@gmail.com','etiboah@gmail.com','jefferykyeigenesis@gmail.com']
+        msg.cc =  app.config['COPY_TO_MAILS']
         if role == 'frontend':
             if years_of_experience < 3:
                 msg.html = render_template('email.html', recipient_name = name, role = 'frontend', message = frontend_junior)
@@ -163,6 +159,24 @@ def sendEmail(name, email, role, years_of_experience, delay):
                 msg.html = render_template('email.html', recipient_name = name, message = "Sorry.., we are experiencing some technical difficulties. we will get back to you shortly.")
                 mail.send(msg)  
 
+# send reminder mail 
+def sendEMailReminder(name, email):
+    reminderDate = "January 9th"
+    reminder =[ "I hope you had a great holiday season! Just a quick note to remind you about the coding challenge to join the Slightly Techie Network.",
+    f"The deadline for submission is {reminderDate}. Kindly treat this with top priority and submit your work on time. Please keep in mind submitting the task is a requirement for joining the network.",
+    "Wishing you the best of luck, happy coding!",
+    "Best Regards,",
+    "Joshua"]
+
+    msg = Message()
+    msg.subject = "Reminder!! - Invitation to Slightly Techie Network"
+    msg.sender = ("Slightly Techie","casvalabs@gmail.com")
+    msg.recipients = [email]
+    msg.cc = app.config['COPY_TO_MAILS']
+    msg.html = render_template('reminder.html', recipient_name = name,  message = reminder)
+    mail.send(msg)
+    
+
 # function to get name,email,role and years_of_experience from csv file
 def read_csv(filename):
   rows = []
@@ -173,40 +187,51 @@ def read_csv(filename):
       row['Email'],
       row['Role'],
       row['Years_of_experience'] ))
-  return rows
+    return rows
 
 
-#function to send email to multiple persons at the same time on a different thread        
+#function to send email to multiple persons at the same time on a different thread  
+      
 def send_emails_to_respective_persons():
-    #name_email_pairs = read_csv('new_emails.csv') #[('Joshua Nyarko Boateng', 'test1@gmail.com', 'backend', '8'), ('Kwame Kay', 'test2@gmail.com', 'fullstack', '1'), ('krypton', 'test3@gmail.com', 'frontend', '12')]
-    name_email_pairs = read_csv('interviewees1.csv')
+    name_email_pairs = read_csv('emails.csv') #[('Joshua Nyarko Boateng', 'test1@gmail.com', 'backend', '8'), ('Kwame Kay', 'test2@gmail.com', 'fullstack', '1'), ('krypton', 'test3@gmail.com', 'frontend', '12')]
                         
-    delay = 1
+    delay = 0
     num_of_emails_sent = 0
     Threads = []
     # a loop to get the name and email of each person from the list 'name_email_pairs'
     for name, email, role, years_of_experience in name_email_pairs:
         # name, email, role, years_of_experience are passed to the thread, making use of the sendEmail function, so that the thread can send the email to respective persons
+        # years = int(years_of_experience)
+        # r = role.lower()
+        # sendEmail(name,email,r,years,time.sleep(delay))
         thread = Thread.Timer(delay, sendEmail, args=[name,email, role.lower(),int(years_of_experience), delay])
-        # the thread is started
+        # # # the thread is started
         thread.start()
         Threads.append(thread)
 
         num_of_emails_sent += 1
         delay += 1
-    print(f"Sent {num_of_emails_sent} emails in {delay} seconds")
+        print(f"Sent {num_of_emails_sent} emails in {delay} seconds")
 
     for threadd in Threads:
         threadd.join()
     print(f"Number of Threads = {len(Threads)}")
         
-
+def send_reminder_email():
+    name_email_pairs = read_csv('reminder_emails.csv')
+    reminderMailsSent = 0
+    for name, email in name_email_pairs:
+        sendEMailReminder(name,email)
+        reminderMailsSent += 1
+        
+    print("Number of Reminder Emails Sent: ", reminderMailsSent)
 
 
 @app.route('/', methods=['GET','POST'])
 def home():
     if request.method == 'POST':
         send_emails_to_respective_persons()
+        #send_reminder_email()
         
         return "Mail Sent!!"
        
@@ -218,5 +243,5 @@ def mailTemplate():
 
 
 if __name__ == '__main__':
-    app.run(debug= True)
+    app.run(debug=True)
 
