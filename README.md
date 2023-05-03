@@ -29,6 +29,17 @@ MAIL_PASSWORD = Test123
 COPY_TO_MAILS=['test1@gmail.com', 'test2@gmail.com','test3@gmail.com','test4@gmail.com','test5@gmail.com']
 ```
 
+> ## How to set up gmail smtp
+1. Sign in to your Gmail Account
+2. Search for ***App Passwords*** and click on it to open a tab.
+3. Select ***Mail*** from the ***Select app*** dropdown.
+4. Select ***Other(Custom name)*** from the ***Select device*** dropdown.
+5. Give a name to the App (ex. ***Mail Script***)
+6. Click on Generate to get password to be used for the Mail Script App.
+7. To use your Gmail Account in third-party apps and testing purposes :
+Mail: mygmailaccount@gmail.com
+Password: Generated app password from gmail. 
+
 ## How to run
 ```python app.py```
 
