@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Sendmail - STN</title>
+		<link rel="stylesheet" href="../static/main.css" />
+		<style>
+			.container {
+				width: 80%;
+				height: 100%;
+				margin: 0 auto;
+				text-align: justify;
+				background-color: black;
+				color: white !important;
+				padding: 2rem;
+				border-radius: 5px;
+			}
+
+			img {
+				width: 5rem;
+				border-radius: 10px;
+			}
+
+			/* CSS */
+			.button-53 {
+				background-color: rgb(8, 8, 8);
+				border: 0 solid #e5e7eb;
+				box-sizing: border-box;
+				margin: 0 auto;
+				color: #e5e7eb;
+				display: flex;
+				font-size: 1rem;
+				font-weight: 700;
+				justify-content: center;
+				line-height: 1.75rem;
+				padding: 0.75rem 1.65rem;
+				position: relative;
+				text-align: center;
+				text-decoration: none #000000 solid;
+				text-decoration-thickness: auto;
+				width: 100%;
+				max-width: 460px;
+				position: relative;
+				cursor: pointer;
+				transform: rotate(-2deg);
+				user-select: none;
+				-webkit-user-select: none;
+				touch-action: manipulation;
+			}
+
+			.button-53:focus {
+				outline: 0;
+			}
+
+			.button-53:after {
+				content: "";
+				position: absolute;
+				border: 1px solid #000000;
+				bottom: 4px;
+				left: 4px;
+				width: calc(100% - 1px);
+				height: calc(100% - 1px);
+			}
+
+			.button-53:hover:after {
+				bottom: 2px;
+				left: 2px;
+			}
+
+			@media (min-width: 768px) {
+				.button-53 {
+					padding: 0.75rem 3rem;
+					font-size: 1.25rem;
+				}
+			}
+			.footer {
+				text-align: center;
+				margin: 2rem auto;
+				width: 60%;
+				font-size: 0.8rem;
+			}
+			.b {
+				color: orangered;
+				font-weight: 900 !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<h3>Hello {{ recipient_name }}, </h3>
+
+			{% for reminder in message %}
+			<p>{{ reminder }}</p>
+			{% endfor %}
+		</div>
+		<footer>
+			<div class="footer">
+				<img
+					src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zi99o1ckiv62fp3cbean.jpg"
+					alt=""
+				/>
+				<p
+					>You have recieved this mail because you have applied to join the
+					Slightly Techie Network (STN) and this are the due processes to follow
+					to officially become a member.</p
+				>
+				<p
+					>We are glad you have been selected to join the STN Team. Kindly
+					follow the instructions above and abibe accordinging.</p
+				>
+				<p
+					>Please if there are any clarifications Kindly reply to this mail to
+					be addressed ASAP.</p
+				>
+				<p>Best wishes and Happy Coding...!</p>
+				<p>Best,</p>
+				<p>STN Team</p>
+				<a href="https://www.twitter.com/_slightyTechie" class="button-53"
+					>Follow Our Twitter Page For More Info..</a
+				>
+			</div>
+		</footer>
+	</body>
+</html>
