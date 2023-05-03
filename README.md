@@ -15,7 +15,8 @@ pip python-dotenv
 > Create a ```.env``` file in the root folder to set the configuration for mail script.
 
 > This is how your ```.env``` file should look like
-``` APP_SECRET = 'Generate random characters for your application'
+``` 
+APP_SECRET = 'Generate random characters for your application key'
 
 MAIL_SERVER = smtp.gmail.com
 MAIL_PORT = 465
