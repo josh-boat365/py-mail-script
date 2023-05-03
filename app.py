@@ -19,7 +19,7 @@ app.config['COPY_TO_MAILS'] = os.environ.get('COPY_TO_MAILS')
 
 mail = Mail(app)
 
-
+# define experience requirements for role types 
 def roles_types():
     roles = {
         'frontend': {
@@ -164,12 +164,6 @@ def send_emails_to_respective_persons():
     num_of_emails_sent = 0
     threads = []
 
-    # def send_email_wrapper(name, email, role, years_of_experience, delay):
-    #     time.sleep(delay)
-    #     sendEmail(name, email, role.lower(), int(years_of_experience), delay)
-
-        
-
     for name, email, role, years_of_experience in name_email_pairs:
         thread = threading.Thread(target=sendEmail, args=(name, email, role.lower(), int(years_of_experience), time.sleep(delay)))
         threads.append(thread)
@@ -183,6 +177,8 @@ def send_emails_to_respective_persons():
     
     print(f"Number of Threads = {len(threads)}")
 
+
+#function to send reminder emails 
 def send_reminder_email():
     name_email_pairs = read_csv('reminder_emails.csv')
     reminderMailsSent = 0
