@@ -110,7 +110,7 @@ def sendEmail(name, email, role, years_of_experience, delay):
         msg.subject = "Invitation to Slightly Techie Network"
         msg.sender = ("Slightly Techie", "casvalabs@gmail.com" )
         msg.recipients = [email]
-        msg.cc =  ['slightlytechie@gmail.com', 'wellingtoncharlottenaaodarley@gmail.com','bquansah007@gmail.com','etiboah@gmail.com','kwame.nyarko365@gmail.com']
+        msg.cc =  ['slightlytechie@gmail.com', 'wellingtoncharlottenaaodarley@gmail.com','bquansah007@gmail.com','etiboah@gmail.com', 'ayagbotse@gmail.com' 'kwame.nyarko365@gmail.com']
         if role in email_messages:
             if years_of_experience < 3:
                 msg.html = render_template('email.html', recipient_name=name, role=role, message=email_messages[role]['<3'])
